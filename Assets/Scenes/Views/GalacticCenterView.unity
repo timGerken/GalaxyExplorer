@@ -156,7 +156,7 @@ Prefab:
         type: 2}
       propertyPath: Sun
       value: 
-      objectReference: {fileID: 1825888815}
+      objectReference: {fileID: 977871469}
     - target: {fileID: 114127190007861664, guid: 19f98428cd2465f43a0d49b2bec22d93,
         type: 2}
       propertyPath: SelectionPOITarget
@@ -176,12 +176,12 @@ Prefab:
         type: 2}
       propertyPath: Sun
       value: 
-      objectReference: {fileID: 1825888815}
+      objectReference: {fileID: 977871469}
     - target: {fileID: 114454673732612480, guid: 19f98428cd2465f43a0d49b2bec22d93,
         type: 2}
       propertyPath: Sun
       value: 
-      objectReference: {fileID: 1825888815}
+      objectReference: {fileID: 977871469}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19f98428cd2465f43a0d49b2bec22d93, type: 2}
   m_IsPrefabParent: 0
@@ -528,7 +528,7 @@ Prefab:
         type: 2}
       propertyPath: Sun
       value: 
-      objectReference: {fileID: 1825888815}
+      objectReference: {fileID: 977871469}
     - target: {fileID: 114394636218677002, guid: ec62aea000522164889325c39b79f777,
         type: 2}
       propertyPath: pointOfInterest
@@ -548,12 +548,12 @@ Prefab:
         type: 2}
       propertyPath: Sun
       value: 
-      objectReference: {fileID: 1825888815}
+      objectReference: {fileID: 977871469}
     - target: {fileID: 114086277126342010, guid: ec62aea000522164889325c39b79f777,
         type: 2}
       propertyPath: Sun
       value: 
-      objectReference: {fileID: 1825888815}
+      objectReference: {fileID: 977871469}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec62aea000522164889325c39b79f777, type: 2}
   m_IsPrefabParent: 0
@@ -847,7 +847,6 @@ GameObject:
   m_Component:
   - component: {fileID: 962714959}
   - component: {fileID: 962714960}
-  - component: {fileID: 962714961}
   - component: {fileID: 962714963}
   - component: {fileID: 962714962}
   - component: {fileID: 962714965}
@@ -886,18 +885,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxZoomSize: 13.5
---- !u!65 &962714961
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 962714958}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.1, z: 0.8}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &962714962
 Animator:
   serializedVersion: 3
@@ -956,8 +943,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a516d5a4f6c734984a0576ac3b1af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FullScreenFillPercentage: 2.5
-  TargetFillCollider: {fileID: 962714961}
+  FullScreenFillPercentage: 0.2
+  TargetFillCollider: {fileID: 977871472}
 --- !u!114 &962714966
 MonoBehaviour:
   m_ObjectHideFlags: 0
