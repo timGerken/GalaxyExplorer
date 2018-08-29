@@ -587,3 +587,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sun: {fileID: 1129002603}
+  SetMaterials: 0

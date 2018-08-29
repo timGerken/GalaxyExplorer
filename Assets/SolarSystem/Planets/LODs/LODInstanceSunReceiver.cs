@@ -8,6 +8,7 @@ namespace GalaxyExplorer
     public class LODInstanceSunReceiver : MonoBehaviour
     {
         public Transform Sun;
+        public bool SetMaterials = true;
 
         private MeshRenderer currentRenderer;
         private Vector4 originalSunPosition;
@@ -15,12 +16,15 @@ namespace GalaxyExplorer
         private void Awake()
         {
             currentRenderer = GetComponent<MeshRenderer>();
-            originalSunPosition = currentRenderer.sharedMaterial.GetVector("_SunPosition");
+            if (SetMaterials)
+            {
+                originalSunPosition = currentRenderer.sharedMaterial.GetVector("_SunPosition");
+            }
         }
 
         private void Update()
         {
-            if (Sun && currentRenderer)
+            if (SetMaterials && Sun && currentRenderer)
             {
                 currentRenderer.sharedMaterial.SetVector("_SunPosition", Sun.position);
             }
@@ -28,7 +32,10 @@ namespace GalaxyExplorer
 
         private void OnDestroy()
         {
-            currentRenderer.sharedMaterial.SetVector("_SunPosition", originalSunPosition);
+            if (SetMaterials)
+            {
+                currentRenderer.sharedMaterial.SetVector("_SunPosition", originalSunPosition);
+            }
         }
     }
 }
