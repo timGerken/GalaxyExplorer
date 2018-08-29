@@ -1,4 +1,4 @@
-﻿Shader "RayMarched/GravitationalLensingDiscOptimised"
+﻿Shader "BlackHole/GravitationalLensingDisc"
 {
 	Properties
 	{
@@ -27,6 +27,7 @@
 	SubShader
 	{
 		Cull Front
+		ZWrite Off
 		Tags { "RenderType"="Opaque" }
 		LOD 100
 
