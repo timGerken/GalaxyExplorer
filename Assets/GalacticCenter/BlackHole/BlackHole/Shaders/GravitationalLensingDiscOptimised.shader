@@ -39,6 +39,7 @@
 			#pragma multi_compile _ _SKYBOX_ENABLED
 
 			#include "UnityCG.cginc"
+			#include "/./../../../../Shaders/cginc/NearClip.cginc"
 
 			struct appdata
 			{
@@ -54,6 +55,7 @@
 				float3 massCentre : TEXCOORD2;
 				float3 orientation : TEXCOORD3;
 				float scale : TEXCOORD4;
+				float clipAmount : TEXCOORD5;
 			};
 
 			sampler2D _MainTex;
@@ -90,7 +92,9 @@
 				// Get the scale by measuring the length of a local scale right 1 vector in world space
 				float3 worldSpaceOrigin = mul(unity_ObjectToWorld, float4(0,0,0,1));
 				float3 worldSpaceRight = mul(unity_ObjectToWorld, float4(1,0,0,1));
-				o.scale = length(worldSpaceOrigin - worldSpaceRight) * _Scale;				
+				o.scale = length(worldSpaceOrigin - worldSpaceRight) * _Scale;	
+
+				o.clipAmount = CalcVertClipAmount(o.worldSpacePosition);			
 				return o;
 			}
 
@@ -252,7 +256,9 @@
 				float3 ro = _WorldSpaceCameraPos;
 
 				// float3 col = tex2D(_MainTex,i.uv); // Color of the scene before this shader was run
-				return gravityRayMarch(ro, rayDirection, i.massCentre, i.orientation, i.scale);
+				fixed4 col = gravityRayMarch(ro, rayDirection, i.massCentre, i.orientation, i.scale);
+
+				return ApplyVertClipAmount(col, i.clipAmount);
 			}
 			ENDCG
 		}
