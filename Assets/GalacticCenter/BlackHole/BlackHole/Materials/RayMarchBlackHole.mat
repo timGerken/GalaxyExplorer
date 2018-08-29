@@ -87,7 +87,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ParallaxAmount: 0.05
-    - _RadialTextureScale: 6.284
+    - _RadialTextureScale: 3.142
     - _Scale: 0.78
     - _SkyboxEnabled: 1
     - _SkyboxFade: 1
