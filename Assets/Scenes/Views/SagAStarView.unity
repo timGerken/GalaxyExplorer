@@ -154,15 +154,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4115631185049752, guid: a203cef141ccb92478a24a0cf5a83f71, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.022727747
+      value: 0.027594715
       objectReference: {fileID: 0}
     - target: {fileID: 4115631185049752, guid: a203cef141ccb92478a24a0cf5a83f71, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.01931861
+      value: 0.023455538
       objectReference: {fileID: 0}
     - target: {fileID: 4115631185049752, guid: a203cef141ccb92478a24a0cf5a83f71, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.022727774
+      value: 0.027594747
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a203cef141ccb92478a24a0cf5a83f71, type: 2}
