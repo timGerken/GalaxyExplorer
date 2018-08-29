@@ -86,6 +86,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _ParallaxAmount: 0.05
     - _RadialTextureScale: 6.284
     - _Scale: 0.78
     - _SkyboxEnabled: 1
@@ -93,9 +94,9 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpeedOfLight: 1
-    - _SpinSpeed1: 0.03
-    - _SpinSpeed2: 0.04
-    - _SpinSpeed3: 0.05
+    - _SpinSpeed1: 0
+    - _SpinSpeed2: 0
+    - _SpinSpeed3: 0
     - _SrcBlend: 1
     - _StepSize: 0.15
     - _StepSizeExtension: 1.19

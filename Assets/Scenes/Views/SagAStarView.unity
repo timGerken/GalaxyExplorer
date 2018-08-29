@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a516d5a4f6c734984a0576ac3b1af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FullScreenFillPercentage: 0.75
+  FullScreenFillPercentage: 2.25
   TargetFillCollider: {fileID: 95206109}
 --- !u!1 &1746006992
 GameObject:
