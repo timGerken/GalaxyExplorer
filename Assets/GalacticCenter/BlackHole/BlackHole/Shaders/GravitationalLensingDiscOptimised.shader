@@ -195,26 +195,26 @@
 
 
 
-							// // Calculate UV Space view direction for parallax
-							// float3 worldSpaceUDirection = normalize(intersectionDisplacement);
-							// float3 worldSpaceVDirection = cross(worldSpaceUDirection, orientation);
-							// float3 normalizedRayDirection = normalize(currentRayDirection);
-							// float2 uvSpaceViewDirection = float2(dot(worldSpaceUDirection, normalizedRayDirection), dot(worldSpaceVDirection, normalizedRayDirection) * (1 / _RadialTextureScale));
+							// Calculate UV Space view direction for parallax
+							float3 worldSpaceUDirection = normalize(intersectionDisplacement);
+							float3 worldSpaceVDirection = cross(worldSpaceUDirection, orientation);
+							float3 normalizedRayDirection = normalize(currentRayDirection);
+							float2 uvSpaceViewDirection = float2(dot(worldSpaceUDirection, normalizedRayDirection), dot(worldSpaceVDirection, normalizedRayDirection) * (1 / _RadialTextureScale));
 							
-							// float u = (1 - smoothstep(_DiscInnerDistance * _DiscInnerDistance, _DiscOuterDistance * _DiscOuterDistance, intersectionDistance * (1 / (Scale))));
-							// float2 uv1 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed1) + uvSpaceViewDirection * _ParallaxAmount;
-							// float2 uv2 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed2);
-							// float2 uv3 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed3) - uvSpaceViewDirection * _ParallaxAmount;
-							// float4 accretionRingTexCol = tex2D(_MainTex3, uv3);
-
-
-
-
 							float u = (1 - smoothstep(_DiscInnerDistance * _DiscInnerDistance, _DiscOuterDistance * _DiscOuterDistance, intersectionDistance * (1 / (Scale))));
-							float2 uv1 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed1);
+							float2 uv1 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed1) + uvSpaceViewDirection * _ParallaxAmount;
 							float2 uv2 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed2);
-							float2 uv3 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed3);
+							float2 uv3 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed3) - uvSpaceViewDirection * _ParallaxAmount;
 							float4 accretionRingTexCol = tex2D(_MainTex3, uv3);
+
+
+
+
+							// float u = (1 - smoothstep(_DiscInnerDistance * _DiscInnerDistance, _DiscOuterDistance * _DiscOuterDistance, intersectionDistance * (1 / (Scale))));
+							// float2 uv1 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed1);
+							// float2 uv2 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed2);
+							// float2 uv3 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed3);
+							// float4 accretionRingTexCol = tex2D(_MainTex3, uv3);
 
 
 

@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3672b4470ef09f444952cd15415a0220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Visualise: 1
+  Visualise: 0
   BlackHoleMaterial: {fileID: 2100000, guid: 5a7ae6338328f444c8ef11de2e8ae742, type: 2}
 --- !u!114 &114832310590185206
 MonoBehaviour:
