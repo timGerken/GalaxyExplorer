@@ -71,7 +71,7 @@ Material:
     - _DiscInnerDistance: 0.18
     - _DiscOuterDistance: 0.8
     - _DstBlend: 0
-    - _EventHorizonDistance: 0.34
+    - _EventHorizonDistance: 0.36
     - _EventHorizonDistanceDisc: 0.34
     - _EventHorizonPower: 4.01
     - _EventHorizonTint: 6000

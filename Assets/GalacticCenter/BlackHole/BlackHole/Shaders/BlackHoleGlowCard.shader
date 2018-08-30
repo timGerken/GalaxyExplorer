@@ -3,14 +3,14 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
-		_MainColor ("Tint", Color) = (1,1,1,1)
 	}
 	SubShader
 	{
 		Tags { "RenderType"="Transparent" }
 		LOD 100
-		Blend One One // Additive
+		Blend One One
 		ZWrite Off
+		ZTest Always
 
 		Pass
 		{
@@ -36,7 +36,6 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			fixed4 _MainColor;
 			
 			v2f vert (appdata v)
 			{
@@ -51,9 +50,7 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				// sample the texture
-				fixed4 col = tex2D(_MainTex, i.uv) * _MainColor;
-				// return col;
-				return ApplyVertClipAmount(col, i.clipAmount);
+				return tex2D(_MainTex, i.uv);
 			}
 			ENDCG
 		}

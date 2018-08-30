@@ -708,7 +708,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: Microsoft Corporation
   metroCertificateIssuer: Microsoft Corporation
-  metroCertificateNotAfter: 80422d982298d401
+  metroCertificateNotAfter: 80b1a284435fd501
   metroApplicationDescription: Galaxy Explorer
   wsaImages:
     65636: Assets/Textures/StoreIcons/GE_icon_store_blue_50x50.png
@@ -833,7 +833,7 @@ PlayerSettings:
     UNet: 0
     Unity_Ads: 0
   facebookSdkVersion: 7.9.1
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 
   projectName: 
   organizationId: 
