@@ -94,9 +94,10 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpeedOfLight: 1
-    - _SpinSpeed1: 0
-    - _SpinSpeed2: 0
+    - _SpinSpeed1: 0.01
+    - _SpinSpeed2: 0.02
     - _SpinSpeed3: 0
+    - _SpiralAmount: 1.2
     - _SrcBlend: 1
     - _StepSize: 0.15
     - _StepSizeExtension: 1.19
