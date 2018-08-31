@@ -40,7 +40,6 @@
 			#pragma multi_compile _ _SKYBOX_ENABLED
 
 			#include "UnityCG.cginc"
-			#include "/./../../../../Shaders/cginc/NearClip.cginc"
 
 			struct appdata
 			{
@@ -56,7 +55,6 @@
 				float3 massCentre : TEXCOORD2;
 				float3 orientation : TEXCOORD3;
 				float scale : TEXCOORD4;
-				float clipAmount : TEXCOORD5;
 			};
 
 			sampler2D _MainTex;
@@ -78,7 +76,8 @@
 			_SkyboxFade,
 			_EventHorizonPower,
 			_EventHorizonTint,
-			_ParallaxAmount;
+			_ParallaxAmount,
+			_Fade;
 			int _MaxStepCount;
 			float4 _Tint1, _Tint2;
 			
@@ -96,7 +95,6 @@
 				float3 worldSpaceRight = mul(unity_ObjectToWorld, float4(1,0,0,1));
 				o.scale = length(worldSpaceOrigin - worldSpaceRight) * _Scale;	
 
-				o.clipAmount = CalcVertClipAmount(o.worldSpacePosition);			
 				return o;
 			}
 
@@ -129,7 +127,6 @@
 				// Find out which side of the accretin disc we are on initially
 				int isAboveCentre = 0;
 				float3 displacement = massCentre - currentRayPosition;
-				// float3 displacementNormalized = normalize(displacement);
 				float planeDistance = dot(orientation, displacement);
 				isAboveCentre = 0;
 				if(planeDistance <= 0)
@@ -145,23 +142,12 @@
 				int hasCrossedEventHorizon = 0;
 				float eventHorizonRim = 0;
 
-				// get the background glow colour
-				// float glowAmount = dot(displacementNormalized, rayDirection);
-				// float massCentreDistanceFromCamera = length(displacement);
-				// glowAmount = pow(glowAmount, massCentreDistanceFromCamera * 50) * .5;
-				// return glowAmount;
-
-				// float currentimeDilationAmount = 0;
-
-				// float3 lastRayPosition = currentRayPosition;
-
 				[unroll(4)] 
 				for (int i = 0; i < _MaxStepCount; ++i)
 				// for (int i = 0; i < 6; ++i)
 				{
 					// Find out if we have crossed the accretion disc
 					float3 displacement = massCentre - currentRayPosition;
-					// float3 displacementNormalized = normalize(displacement);
 					float planeDistance = dot(orientation, displacement);
 					if(planeDistance <= 0)
 					{
@@ -186,15 +172,6 @@
 
 						if(intersectionDistance > _EventHorizonDistanceDisc * Scale * _BlackHoleMass)
 						{
-							// warp by time dilation amount
-							// float intersectionStepSize = length(intersectionPoint - lastRayPosition);
-							// float intersectionTimeDilation = currentimeDilationAmount - i * 7;
-							// // float intersectionTimeDilation = (currentimeDilationAmount + (1 / length(intersectionDisplacement)) / intersectionStepSize);
-							// intersectionTimeDilation *= .001;
-
-
-
-
 							// Calculate UV Space view direction for parallax
 							float3 worldSpaceUDirection = normalize(intersectionDisplacement);
 							float3 worldSpaceVDirection = cross(worldSpaceUDirection, orientation);
@@ -206,18 +183,6 @@
 							float2 uv2 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed2);
 							float2 uv3 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed3) - uvSpaceViewDirection * _ParallaxAmount;
 							float4 accretionRingTexCol = tex2D(_MainTex3, uv3);
-
-
-
-
-							// float u = (1 - smoothstep(_DiscInnerDistance * _DiscInnerDistance, _DiscOuterDistance * _DiscOuterDistance, intersectionDistance * (1 / (Scale))));
-							// float2 uv1 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed1);
-							// float2 uv2 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed2);
-							// float2 uv3 = float2(u, vAngle / _RadialTextureScale + _Time.y * _SpinSpeed3);
-							// float4 accretionRingTexCol = tex2D(_MainTex3, uv3);
-
-
-
 
 							accretionRingColourAdd += tex2D(_MainTex, uv1) * _Tint1 * accretionRingTexCol * accretionRingColourMultiply;
 							accretionRingColourAdd += tex2D(_MainTex2, uv2) * _Tint2 * accretionRingTexCol * accretionRingColourMultiply;
@@ -239,17 +204,12 @@
 					if(squareDistance < (_EventHorizonDistance * _EventHorizonDistance * Scale) * (_BlackHoleMass * _BlackHoleMass * Scale))
 					{
 						hasCrossedEventHorizon = 1;
-						// eventHorizonRim = pow (length(displacement), _EventHorizonPower * pow(Scale, .3142)) * _EventHorizonTint;
 					}
-
-					// Time dilation
-					// currentimeDilationAmount += ((1 / length(displacement))) / _StepSize;
 
 					float forceMagnitude = _BlackHoleMass / squareDistance;
 
 					currentRayDirection += forceMagnitude * displacement * stepSize * Scale;
 
-					// lastRayPosition = currentRayPosition;
 					currentRayPosition += normalize(currentRayDirection) * stepSize * Scale;
 				}
 
@@ -262,11 +222,9 @@
         	        // decode cubemap data into actual color
     	            backgroundColor.rgb = DecodeHDR (skyData, unity_SpecCube0_HDR) * _SkyboxFade;
 #endif
-					// backgroundColor += glowAmount;
 				}
 
 				returnColour =  backgroundColor * accretionRingColourMultiply + accretionRingColourAdd + (eventHorizonRim * accretionRingColourMultiply);
-				// returnColour = returnColour + accretionRingColourAdd;
 
 				return returnColour;
 			}
@@ -278,10 +236,9 @@
 				// ray origin (camera position)
 				float3 ro = _WorldSpaceCameraPos;
 
-				// float3 col = tex2D(_MainTex,i.uv); // Color of the scene before this shader was run
 				fixed4 col = gravityRayMarch(ro, rayDirection, i.massCentre, i.orientation, i.scale);
 
-				return ApplyVertClipAmount(col, i.clipAmount);
+				return col * (1 - _Fade);
 			}
 			ENDCG
 		}

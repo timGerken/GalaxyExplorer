@@ -41,9 +41,10 @@ GameObject:
   - component: {fileID: 135654381789449106}
   - component: {fileID: 33381491248782418}
   - component: {fileID: 23624718892516004}
+  - component: {fileID: 114017205430314904}
   m_Layer: 0
   m_Name: BlackHole
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,6 +232,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1310380916819676}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114017205430314904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299996747110904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304e4f6ea0ccf0b48a52020851f1cbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RenderersToFade:
+  - {fileID: 23157183781398390}
+  - {fileID: 23648029934472450}
+  UserClippingDistance: 0.3
+  FadeStart: 1
+  FadeEnd: 0.3
 --- !u!114 &114312698451830332
 MonoBehaviour:
   m_ObjectHideFlags: 1

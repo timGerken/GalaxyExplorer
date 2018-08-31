@@ -19,7 +19,6 @@
 			#pragma fragment frag
 			
 			#include "UnityCG.cginc"
-			#include "/./../../../../Shaders/cginc/NearClip.cginc"
 
 			struct appdata
 			{
@@ -36,21 +35,20 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
+			float _Fade;
 			
 			v2f vert (appdata v)
 			{
 				v2f o;
-				float3 wPos = mul(unity_ObjectToWorld, v.vertex);
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				o.clipAmount = CalcVertClipAmount(wPos);
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
 				// sample the texture
-				return tex2D(_MainTex, i.uv);
+				return tex2D(_MainTex, i.uv) * (1 - _Fade);
 			}
 			ENDCG
 		}
