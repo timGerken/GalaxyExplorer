@@ -675,8 +675,21 @@ namespace GalaxyExplorer
                 }
                 else
                 {
-                    float scale = sceneSizer.GetScalar(desiredScale) * prevSizer.GetScalar() / (sourceSizer.GetScalar() * sceneSizer.FullScreenFillPercentage);
-                    content.transform.localScale = new Vector3(scale, scale, scale);
+                    if (prevSizer.TargetFillCollider.gameObject.name == "BlackHole")
+                    {
+                        // If it's going from Sagitarius A* to Galactic Centre
+                        Vector3 actualPreviousSize = prevSizer.TargetFillCollider.gameObject.transform.lossyScale;
+                        Vector3 actualNextSize = sourceSizer.TargetFillCollider.gameObject.transform.lossyScale;
+                        float scaleDifference = actualPreviousSize.x / actualNextSize.x;
+                        Vector3 newScale = scaleDifference * content.transform.localScale;
+                        content.transform.localScale = newScale;
+                    }
+                    else
+                    {
+                        // If it's going from the Sun to the Solar System view
+                        float scale = sceneSizer.GetScalar(desiredScale) * prevSizer.GetScalar() / (sourceSizer.GetScalar() * sceneSizer.FullScreenFillPercentage);
+                        content.transform.localScale = new Vector3(scale, scale, scale);
+                    }
                 }
 
                 Vector3 prevToPlanet = prevPlanet.transform.position - prevSun.transform.position;
