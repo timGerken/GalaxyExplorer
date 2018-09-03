@@ -247,8 +247,8 @@ MonoBehaviour:
   - {fileID: 23157183781398390}
   - {fileID: 23648029934472450}
   UserClippingDistance: 0.3
-  FadeStart: 1
-  FadeEnd: 0.3
+  FadeStart: 0.3
+  FadeEnd: 0.25
 --- !u!114 &114312698451830332
 MonoBehaviour:
   m_ObjectHideFlags: 1
