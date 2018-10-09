@@ -18,7 +18,7 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>WSATestCertificate.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
     <PlatformShortName>$(Platform)</PlatformShortName>
     <AllowedReferenceRelatedFileExtensions>
@@ -30,6 +30,10 @@
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
+    <PackageCertificateThumbprint>51BEF46E5163B0F513BACB90EB2E8114627EC366</PackageCertificateThumbprint>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
+    <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -355,6 +359,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="TemporaryKey.pfx" />
     <None Include="WSATestCertificate.pfx" />
   </ItemGroup>
   <ItemGroup>
