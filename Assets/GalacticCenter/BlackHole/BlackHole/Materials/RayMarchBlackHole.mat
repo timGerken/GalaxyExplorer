@@ -100,7 +100,7 @@ Material:
     - _SpiralAmount: 1.2
     - _SrcBlend: 1
     - _StepSize: 0.15
-    - _StepSizeExtension: 1.19
+    - _StepSizeExtension: 0.12
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

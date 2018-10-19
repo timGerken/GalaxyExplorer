@@ -29,8 +29,9 @@
 	{
 		Cull Front
 		ZWrite Off
-		Tags { "RenderType"="Opaque" }
+		Tags { "RenderType"="Transparent" }
 		LOD 100
+		Blend One One
 
 		Pass
 		{
@@ -112,7 +113,7 @@
 
 			float4 gravityRayMarch(float3 rayOrigin, float3 rayDirection, float3 massCentre, float3 orientation, float Scale)
 			{
-				float stepSize = (((_DiscOuterDistance * 2) + _FrontStepExtension) / _MaxStepCount) * _StepSizeExtension;
+				float stepSize = (((_DiscOuterDistance * 2) + _FrontStepExtension) / _MaxStepCount) * (1 + _StepSizeExtension);
 
 				float4 accretionRingColourAdd = float4(0,0,0,1);
 				float4 accretionRingColourMultiply = float4(1,1,1,1);
@@ -142,7 +143,7 @@
 				int hasCrossedEventHorizon = 0;
 				float eventHorizonRim = 0;
 
-				[unroll(4)] 
+				// [unroll(4)] 
 				for (int i = 0; i < _MaxStepCount; ++i)
 				// for (int i = 0; i < 6; ++i)
 				{
@@ -208,9 +209,11 @@
 
 					float forceMagnitude = _BlackHoleMass / squareDistance;
 
-					currentRayDirection += forceMagnitude * displacement * stepSize * Scale;
+					float extendedStepSize = stepSize * (1 + _StepSizeExtension);
 
-					currentRayPosition += normalize(currentRayDirection) * stepSize * Scale;
+					currentRayDirection += forceMagnitude * displacement * extendedStepSize * Scale;
+
+					currentRayPosition += normalize(currentRayDirection) * extendedStepSize  * Scale;
 				}
 
 				float4 backgroundColor = float4(0,0,0,1);

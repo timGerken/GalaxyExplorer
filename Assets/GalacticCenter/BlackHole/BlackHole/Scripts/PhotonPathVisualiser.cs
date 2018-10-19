@@ -65,7 +65,7 @@ public class PhotonPathVisualiser : MonoBehaviour
 
         DrawGizmoLine(hasCrossedEventHorizon);
 
-        float stepSize = (((_DiscOuterDistance * 2) + _FrontStepExtension) / _MaxStepCount) * _StepSizeExtension;
+        float stepSize = (((_DiscOuterDistance * 2) + _FrontStepExtension) / _MaxStepCount) * (1 +_StepSizeExtension);
 
         /*[unroll(10)] */
         for (int i = 0; i < _MaxStepCount; ++i)
@@ -113,9 +113,11 @@ public class PhotonPathVisualiser : MonoBehaviour
 
             float forceMagnitude = _BlackHoleMass / squareDistance;
 
-            currentRayDirection += forceMagnitude * displacement * stepSize * _ActualScale;
+            float extendedStepSize = stepSize * (1 + _StepSizeExtension);
 
-            currentRayPosition += currentRayDirection.normalized * stepSize * _ActualScale;
+            currentRayDirection += forceMagnitude * displacement * extendedStepSize * _ActualScale;
+
+            currentRayPosition += currentRayDirection.normalized * extendedStepSize * _ActualScale;
 
             DrawGizmoLine(hasCrossedEventHorizon);
         }
